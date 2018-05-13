@@ -8,5 +8,6 @@ public interface ProductosService {
 
 	List<Productos>listarProductos();
 	void insertarProductos(Productos producto);
+	public Productos findById(int id);
 
 }

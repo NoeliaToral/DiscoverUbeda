@@ -41,6 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/newuser/**", "/delete-user-*").access("hasRole('ADMIN')")
 				.antMatchers("/insertarProductos").access("hasRole('ADMIN')")
 				.antMatchers("/insertarArchivos").access("hasRole('ADMIN')")
+				.antMatchers("/comprarProducto-*").access("hasRole('ADMIN')")
 				.antMatchers("/edit-user-*")
 				.access("hasRole('ADMIN') or hasRole('DBA')").and().formLogin().loginPage("/login")
 				.loginProcessingUrl("/login").usernameParameter("ssoId").passwordParameter("password").and()

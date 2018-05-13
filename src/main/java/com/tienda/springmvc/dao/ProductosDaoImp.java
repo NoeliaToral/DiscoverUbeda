@@ -3,6 +3,7 @@ package com.tienda.springmvc.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
@@ -22,8 +23,11 @@ public class ProductosDaoImp extends AbstractDao<Integer, Productos> implements 
 	
 	public void insertarProductos(Productos producto) {
 		persist(producto);
-			
-			
+	}
+	
+	public Productos findById(int id) {
+		Productos productos = getByKey(id);
 		
+		return productos;
 	}
 }

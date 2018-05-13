@@ -146,12 +146,12 @@
 					<version>2.4</version>
 					<configuration>
 						<warSourceDirectory>src/main/webapp</warSourceDirectory>
-						<warName>SpringMVCHibernateWithSpringSecurityExample</warName>
+						<warName>DiscoverUbeda</warName>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		<finalName>SpringMVCHibernateWithSpringSecurityExample</finalName>
+		<finalName>DiscoverUbeda</finalName>
 	</build>
 </project>

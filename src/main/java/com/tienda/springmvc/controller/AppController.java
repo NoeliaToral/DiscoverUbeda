@@ -4,7 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -12,11 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -35,12 +30,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.tienda.springmvc.model.Carrito;
 import com.tienda.springmvc.model.Productos;
 import com.tienda.springmvc.model.User;
 import com.tienda.springmvc.model.UserProfile;
+import com.tienda.springmvc.service.CarritoService;
 import com.tienda.springmvc.service.ProductosService;
 import com.tienda.springmvc.service.UserProfileService;
 import com.tienda.springmvc.service.UserService;
@@ -70,6 +66,9 @@ public class AppController {
 
 	@Autowired
 	CommonsMultipartResolver resolver;
+	
+	@Autowired
+	CarritoService carritoService;
 
 	/**
 	 * This method will list all existing users.
@@ -250,14 +249,7 @@ public class AppController {
 		return authenticationTrustResolver.isAnonymous(authentication);
 	}
 
-	@RequestMapping(value = { "/hola" }, method = RequestMethod.GET)
-	public String listProductos(ModelMap model) {
-
-		List<Productos> productos = productosService.listarProductos();
-		model.addAttribute("listado", productos);
-
-		return "listadoContactos";
-	}
+	
 
 	@RequestMapping(value = "/insertarProductos")
 	public String insertar(ModelMap model) {
@@ -308,6 +300,60 @@ public class AppController {
 	
 		
 		return "insertadoOK";
+	}
+	
+	@RequestMapping(value = { "/listarProductos" }, method = RequestMethod.GET)
+	public String listProductos(ModelMap model) {
+
+		List<Productos> productos = productosService.listarProductos();
+		model.addAttribute("listado", productos);
+		
+		return "listadoProductos";
+	}
+	
+	
+	
+	@RequestMapping(value=  { "/comprarProducto-{idProductos}" }, method = RequestMethod.GET)
+	public String comprarProducto(@PathVariable int idProductos, ModelMap model, HttpServletRequest req) {
+		
+		User user = new User();
+		
+		String username = getPrincipal();
+		user = userService.findBySSO(username);
+		
+			
+		System.out.println("id producto: "+idProductos);
+		Productos productos  = productosService.findById(idProductos);
+		
+	
+		
+		int unidades = 1;
+		Carrito carrito = new Carrito();
+		carrito.setUser(user);
+		carrito.setProductos(productos);
+		carrito.setUnidades(unidades);
+		carritoService.insertarCarrito(carrito);
+		
+		System.out.println("id user: "+user.getId());
+		
+		List<Carrito> listadoCarrito = carritoService.listarCarritoUser(user.getId());
+		
+		List<Productos> productosListar = new ArrayList<Productos>();
+		
+		
+		for (Carrito lista: listadoCarrito) {
+			lista.getProductos();
+			productosListar.add(lista.getProductos());
+		}
+		model.addAttribute("listadoCarrito", listadoCarrito);
+		model.addAttribute("productosListar", productosListar);
+		model.addAttribute("loggedinuser", getPrincipal());
+		
+		
+		
+		
+		
+		return "listadoCarrito";
 	}
 		
 

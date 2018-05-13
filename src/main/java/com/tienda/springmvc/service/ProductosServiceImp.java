@@ -26,4 +26,7 @@ public class ProductosServiceImp implements ProductosService {
 		productosDao.insertarProductos(producto);
 	}
 
+	public Productos findById(int id) {
+		return productosDao.findById(id);
+	}
 }
