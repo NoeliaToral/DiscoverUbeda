@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -20,11 +22,14 @@ public class Productos implements Serializable{
 	private Integer idProductos;
 	private String nombreProducto;
 	private String descripcion;
+	
 	private double precio;
 	private String url;
 	private String material;
 	private String talla;
 	
+	
+	private Categorias categoria;
 
 	public Productos() {
 	}
@@ -47,7 +52,6 @@ public class Productos implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "idProductos", unique = true, nullable = false)
 	public Integer getIdProductos() {
 		return this.idProductos;
@@ -110,7 +114,18 @@ public class Productos implements Serializable{
 	public void setTalla(String talla) {
 		this.talla = talla;
 	}
-	
 
+	@ManyToOne
+	@JoinColumn(name="idCategoria")
+	public Categorias getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categorias categoria) {
+		this.categoria = categoria;
+	}
+
+	
+	
 }
 

@@ -14,21 +14,21 @@
 		</span> <span class="floatRight"><a href="<c:url value="/logout" />">Logout</a></span>
 	</div>
 	<div>
-	<center>
-	<table>
-		<c:forEach items="${listadoCarrito}" var="carrito">
-		<tr>
-			<td><c:out value="${carrito.id_venta}"></c:out></td>
-			<td><c:out value="${carrito.unidades}"></c:out></td>
-		</tr>
-		</c:forEach>
-		<c:forEach items="${productosListar}" var="productos">
-		<tr>
-			<td><c:out value="${productos.nombreProducto}"></c:out></td>
-			<td><c:out value="${productos.descripcion}"></c:out></td>
-		</tr>
-		</c:forEach>
-		</table>
+		<center>
+			<table>
+				<c:forEach items="${listadoCarrito}" var="carrito">
+					<c:forEach items="${productosListar}" var="productos">
+						<tr>
+							<td><c:out value="${carrito.id_venta}"></c:out></td>
+							<td><c:out value="${carrito.unidades}"></c:out></td>
+							<td><c:out value="${productos.nombreProducto}"></c:out></td>
+							<td><c:out value="${productos.descripcion}"></c:out></td>
+							<td><c:out value="${productos.precio}"></c:out></td>
+						</tr>
+					</c:forEach>
+				</c:forEach>
+			</table>
+			
 		</center>
 	</div>
 

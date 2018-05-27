@@ -33,10 +33,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.tienda.springmvc.model.Carrito;
+import com.tienda.springmvc.model.Categorias;
 import com.tienda.springmvc.model.Productos;
 import com.tienda.springmvc.model.User;
 import com.tienda.springmvc.model.UserProfile;
 import com.tienda.springmvc.service.CarritoService;
+import com.tienda.springmvc.service.CategoriasService;
 import com.tienda.springmvc.service.ProductosService;
 import com.tienda.springmvc.service.UserProfileService;
 import com.tienda.springmvc.service.UserService;
@@ -69,6 +71,9 @@ public class AppController {
 	
 	@Autowired
 	CarritoService carritoService;
+	
+	@Autowired
+	CategoriasService categoriasService;
 
 	/**
 	 * This method will list all existing users.
@@ -281,8 +286,8 @@ public class AppController {
 				String rootPath = System.getProperty("catalina.home");
 				//File dir = new File(rootPath + File.separator + "tmpFiles");
 				File dir = new File("C\\");
-				if (!dir.exists())
-					dir.mkdirs();
+//				if (!dir.exists())
+//					dir.mkdirs();
 
 				// Crear documento en el servidor
 				File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
@@ -305,8 +310,10 @@ public class AppController {
 	@RequestMapping(value = { "/listarProductos" }, method = RequestMethod.GET)
 	public String listProductos(ModelMap model) {
 
-		List<Productos> productos = productosService.listarProductos();
-		model.addAttribute("listado", productos);
+		List<Productos> listadoProductos = productosService.listarProductos();
+		model.addAttribute("listado", listadoProductos);
+		
+		
 		
 		return "listadoProductos";
 	}
@@ -354,6 +361,34 @@ public class AppController {
 		
 		
 		return "listadoCarrito";
+	}
+	
+	@RequestMapping(value=  { "/pagoCorrecto" }, method = RequestMethod.POST)
+	public String pagoCorrecto(HttpServletRequest req) {
+		
+		String prueba = req.getParameter("payment_status");
+		String prueba2 = req.getParameter("item_number");
+		
+		return "pagoCorrecto";
+	}
+	
+	@RequestMapping(value=  { "/css" }, method = RequestMethod.GET)
+	public String css() {
+		return "Listado-para-css";
+	}
+	
+	@RequestMapping(value=  { "/listarCategorias-{descripcion}" }, method = RequestMethod.GET)
+	public String listadoCategorias(@PathVariable String descripcion,ModelMap model) {
+		
+		//Buscamos el id de la categoria elegida
+		int idCategoria = categoriasService.findByDescripcion(descripcion);
+		//Sacamos los productos que tengan esa categoria
+		List<Productos> listadoProductos = productosService.listarProductosCategorias(idCategoria);
+		
+		model.addAttribute("listado", listadoProductos);
+				
+		return "listadoProductos";
+		
 	}
 		
 

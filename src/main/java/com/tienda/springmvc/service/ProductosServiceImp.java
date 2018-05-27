@@ -29,4 +29,8 @@ public class ProductosServiceImp implements ProductosService {
 	public Productos findById(int id) {
 		return productosDao.findById(id);
 	}
+	
+	public List<Productos> listarProductosCategorias(int idCategoria){
+		return productosDao.listarProductosCategorias(idCategoria);
+	}
 }

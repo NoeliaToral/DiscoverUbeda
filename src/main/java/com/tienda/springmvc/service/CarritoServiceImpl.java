@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tienda.springmvc.dao.CarritoDao;
 import com.tienda.springmvc.model.Carrito;
+import com.tienda.springmvc.model.Categorias;
 
 @Service("carritoServiceImpl")
 @Transactional
@@ -27,5 +28,6 @@ public class CarritoServiceImpl implements CarritoService{
 	public List<Carrito> listarCarritoUser(int id){
 		return carritoDao.listarCarritoUser(id);
 	}
+	
 	
 }

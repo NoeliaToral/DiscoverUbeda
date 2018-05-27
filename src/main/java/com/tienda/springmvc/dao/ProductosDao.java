@@ -9,5 +9,6 @@ public interface ProductosDao {
 	List<Productos>listarProductos();
 	void insertarProductos(Productos producto);
 	public Productos findById(int id);
+	List<Productos> listarProductosCategorias(int idCategoria);
 
 }
