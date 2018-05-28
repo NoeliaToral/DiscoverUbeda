@@ -44,15 +44,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-4" for="url">Url:</label>
-     	 <div class="col-sm-4">          
-			<form:input type="text" class="form-control" placeholder="URL" path="url" />
-		</div>
-    </div>
-     <div class="form-group">
       <label class="control-label col-sm-4" for="email">Material:</label>
       <div class="col-sm-4">     
-      	<form:input type="text" class="form-control" placeholder="Email" path="material" />     
+      	<form:input type="text" class="form-control" placeholder="Material" path="material" />     
       </div>
     </div>
      <div class="form-group">
@@ -62,9 +56,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-4" class="form-control" palceholder="URL" for="url">URL:</label>
+      <label class="control-label col-sm-4" class="form-control">Imagen principal:</label>
       <div class="col-sm-4">          
-			<input type="file" name="file" />
+			<input type="file" name="filePrincipal" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4" class="form-control">Imagen 1:</label>
+      <div class="col-sm-4">          
+			<input type="file" name="fileUno" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4" class="form-control">Imagen 2:</label>
+      <div class="col-sm-4">          
+			<input type="file" name="fileDos" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4" class="form-control">Imagen 3:</label>
+      <div class="col-sm-4">          
+			<input type="file" name="fileTres" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4" class="form-control">Imagen 4:</label>
+      <div class="col-sm-4">          
+			<input type="file" name="fileCuatro" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4" class="form-control">Imagen 5:</label>
+      <div class="col-sm-4">          
+			<input type="file" name="fileCinco" />
       </div>
     </div>
   	<div class="form-group">        

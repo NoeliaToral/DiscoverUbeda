@@ -10,5 +10,7 @@ public interface ProductosDao {
 	void insertarProductos(Productos producto);
 	public Productos findById(int id);
 	List<Productos> listarProductosCategorias(int idCategoria);
+	List<Productos> buscarProductosByNombre(String nombreProducto);
+	int maxIdProductos();
 
 }

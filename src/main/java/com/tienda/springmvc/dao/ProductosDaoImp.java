@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+
+import com.tienda.springmvc.model.Carrito;
 import com.tienda.springmvc.model.Productos;
 
 
@@ -35,5 +38,20 @@ public class ProductosDaoImp extends AbstractDao<Integer, Productos> implements 
 		Criteria criteria = createEntityCriteria().addOrder(Order.asc("nombreProducto")).add(Restrictions.eq("categoria.idCategoria", idCategoria));
 		List<Productos> productos = (List<Productos>) criteria.list();
 		return productos;
+	}
+	
+	public List<Productos> buscarProductosByNombre(String nombreProducto){
+		
+		Criteria criteria = createEntityCriteria().add(Restrictions.like("nombreProducto", nombreProducto));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);// To avoid duplicates.
+		List<Productos> productos = (List<Productos>) criteria.list();
+		return productos;
+	}
+	
+	public int maxIdProductos() {
+		
+		Criteria criteria =  createEntityCriteria().setProjection(Projections.max("idProductos"));
+		int maximo = (int) criteria.uniqueResult();
+		return maximo;
 	}
 }

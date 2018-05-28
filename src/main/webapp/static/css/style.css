@@ -532,10 +532,11 @@ ul {
 	border-bottom: 1px solid #ddd;
 	font-weight:800;
 }
-.menu > li > a img{
+.menu > li > a img,  .menu > .cute > li > a img{
 	vertical-align: baseline;
 	margin-right: 5px;
 }
+
 .menu ul li a {
 	width: 100%;
 	display: block;

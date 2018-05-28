@@ -267,42 +267,113 @@ public class AppController {
 
 	@RequestMapping(value = { "/insertarProductos" }, method = RequestMethod.POST)
 	public String insertarProductos(@Valid Productos productos,
-			BindingResult result, @RequestParam("file") MultipartFile file)
+			BindingResult result, @RequestParam("filePrincipal") MultipartFile file, @RequestParam("fileUno") MultipartFile fileUno,
+			@RequestParam("fileDos") MultipartFile fileDos,@RequestParam("fileTres") MultipartFile fileTres,
+			@RequestParam("fileCuatro") MultipartFile fileCuatro, @RequestParam("fileCinco") MultipartFile fileCinco)
 			throws IOException {
 
-		String nombreProducto = productos.getNombreProducto();
-		String descripcion = productos.getDescripcion();
-		Double precio = productos.getPrecio();
-		String url = productos.getUrl();
-		String talla = productos.getTalla();
-		String material = productos.getMaterial();
+		//Obtenemos el maximo id para meterlo en la carpeta +1 
+		int maximoId = productosService.maxIdProductos() + 1;
 		
-		productosService.insertarProductos(productos);
-		
+		//Recogemos todas las imagenes
 		if (!file.isEmpty()) {
 			try {
+				String url = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				productos.setUrl(url);
 				byte[] bytes = file.getBytes();
-				// Crear el directorio para almacenar el archivo
-				String rootPath = System.getProperty("catalina.home");
-				//File dir = new File(rootPath + File.separator + "tmpFiles");
-				File dir = new File("C\\");
-//				if (!dir.exists())
-//					dir.mkdirs();
-
-				// Crear documento en el servidor
-				File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				
+				File url2 = new File(url);
+				// Creamos el directorio para almacenar el archivo	
+				if (!url2.exists())
+					url2.mkdirs();
+				File dirFile = new File(url + File.separator + file.getOriginalFilename());
+				
+				// Crear documento en la carpeta
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dirFile));
+				
 				stream.write(bytes);
 				stream.close();
 
-				System.out.println( "Documento subido correctamente = " + file.getOriginalFilename() + " Ubicacion del Archivo = " + serverFile.getAbsolutePath());
+				System.out.println( "Documento subido correctamente = " + file.getOriginalFilename() + " Ubicacion del Archivo = " + dirFile.getAbsolutePath());
 			} catch (Exception e) {
 				System.out.println( "Ocurrio un error al subir documento" + file.getOriginalFilename() + " => " + e.getMessage());
 			}
 		} else {
 			System.out.println("Ocurrio un error al subir " + file.getOriginalFilename() + " documento vacio.");
 		}
+		
+		if(!fileUno.isEmpty()) {
+			try {
+				String url1 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				productos.setUrl1(url1);
+				byte[] bytesUno = fileUno.getBytes();
+				File dirFileUno = new File(url1 + File.separator + fileUno.getOriginalFilename());
+				BufferedOutputStream stream1 = new BufferedOutputStream(new FileOutputStream(dirFileUno));
+				stream1.write(bytesUno);
+				stream1.close();
+			}catch (Exception e) {
+				System.out.println( "Ocurrio un error al subir documento" + fileUno.getOriginalFilename() + " => " + e.getMessage());
+			}
+		}
+		
+		if(!fileDos.isEmpty()) {
+			try {
+				String url2 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				productos.setUrl2(url2);
+				byte[] bytesDos = fileDos.getBytes();
+				File dirFileDos = new File(url2 + File.separator + fileDos.getOriginalFilename());
+				BufferedOutputStream stream2 = new BufferedOutputStream(new FileOutputStream(dirFileDos));
+				stream2.write(bytesDos);
+				stream2.close();
+			}catch (Exception e) {
+				System.out.println( "Ocurrio un error al subir documento" + fileDos.getOriginalFilename() + " => " + e.getMessage());
+			}
+		}
+		
+		if(!fileTres.isEmpty()) {
+			try {
+				String url3 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				productos.setUrl3(url3);
+				byte[] bytesTres = fileTres.getBytes();
+				File dirFileTres = new File(url3 + File.separator + fileTres.getOriginalFilename());
+				BufferedOutputStream stream3 = new BufferedOutputStream(new FileOutputStream(dirFileTres));
+				stream3.write(bytesTres);
+				stream3.close();
+			}catch (Exception e) {
+				System.out.println( "Ocurrio un error al subir documento" + fileTres.getOriginalFilename() + " => " + e.getMessage());
+			}
+		}
+		
+		if(!fileCuatro.isEmpty()) {
+			try {
+				String url4 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				productos.setUrl4(url4);
+				byte[] bytesCuatro = fileCuatro.getBytes();
+				File dirFileCuatro = new File(url4 + File.separator + fileCuatro.getOriginalFilename());
+				BufferedOutputStream stream4 = new BufferedOutputStream(new FileOutputStream(dirFileCuatro));
+				stream4.write(bytesCuatro);
+				stream4.close();
+			}catch (Exception e) {
+				System.out.println( "Ocurrio un error al subir documento" + fileCuatro.getOriginalFilename() + " => " + e.getMessage());
+			}
+		}
+		
+		if(!fileCinco.isEmpty()) {
+			try {
+				String url5 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				productos.setUrl5(url5);
+				byte[] bytesCinco = fileCinco.getBytes();
+				File dirFileCinco = new File(url5 + File.separator + fileCinco.getOriginalFilename());
+				BufferedOutputStream stream5 = new BufferedOutputStream(new FileOutputStream(dirFileCinco));
+				stream5.write(bytesCinco);
+				stream5.close();
+			}catch (Exception e) {
+				System.out.println( "Ocurrio un error al subir documento" + fileCinco.getOriginalFilename() + " => " + e.getMessage());
+			}
+		}
 	
+		//Insertamos el producto en la BBDD
+		productosService.insertarProductos(productos);
 		
 		return "insertadoOK";
 	}
@@ -372,11 +443,6 @@ public class AppController {
 		return "pagoCorrecto";
 	}
 	
-	@RequestMapping(value=  { "/css" }, method = RequestMethod.GET)
-	public String css() {
-		return "Listado-para-css";
-	}
-	
 	@RequestMapping(value=  { "/listarCategorias-{descripcion}" }, method = RequestMethod.GET)
 	public String listadoCategorias(@PathVariable String descripcion,ModelMap model) {
 		
@@ -390,8 +456,19 @@ public class AppController {
 		return "listadoProductos";
 		
 	}
-		
+	
+	@RequestMapping(value=  { "/buscarProductos" }, method = RequestMethod.POST)
+	public String buscarProductos(HttpServletRequest req, ModelMap model) {
+		String nombreProducto = "%"+ req.getParameter("nombreProducto") +"%";
+		List<Productos> listadoProductos = productosService.buscarProductosByNombre(nombreProducto);
+		model.addAttribute("listado", listadoProductos);
+		return "listadoProductos";
+	}
 
+	@RequestMapping(value=  { "/css" }, method = RequestMethod.GET)
+	public String css() {
+		return "Listado-para-css";
+	}
 
 	
 

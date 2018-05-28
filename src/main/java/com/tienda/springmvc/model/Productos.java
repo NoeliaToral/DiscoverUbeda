@@ -22,11 +22,16 @@ public class Productos implements Serializable{
 	private Integer idProductos;
 	private String nombreProducto;
 	private String descripcion;
-	
 	private double precio;
 	private String url;
 	private String material;
 	private String talla;
+	private String url1;
+	private String url2;
+	private String url3;
+	private String url4;
+	private String url5;
+	
 	
 	
 	private Categorias categoria;
@@ -125,6 +130,52 @@ public class Productos implements Serializable{
 		this.categoria = categoria;
 	}
 
+	@Column(name = "url1")
+	public String getUrl1() {
+		return url1;
+	}
+
+	public void setUrl1(String url1) {
+		this.url1 = url1;
+	}
+
+	@Column(name = "url2")
+	public String getUrl2() {
+		return url2;
+	}
+
+	public void setUrl2(String url2) {
+		this.url2 = url2;
+	}
+
+	@Column(name = "url3")
+	public String getUrl3() {
+		return url3;
+	}
+
+	public void setUrl3(String url3) {
+		this.url3 = url3;
+	}
+
+	@Column(name = "url4")
+	public String getUrl4() {
+		return url4;
+	}
+
+	public void setUrl4(String url4) {
+		this.url4 = url4;
+	}
+
+	@Column(name = "url5")
+	public String getUrl5() {
+		return url5;
+	}
+
+	public void setUrl5(String url5) {
+		this.url5 = url5;
+	}
+
+	
 	
 	
 }

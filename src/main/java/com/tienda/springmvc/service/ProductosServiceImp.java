@@ -33,4 +33,12 @@ public class ProductosServiceImp implements ProductosService {
 	public List<Productos> listarProductosCategorias(int idCategoria){
 		return productosDao.listarProductosCategorias(idCategoria);
 	}
+	
+	public List<Productos> buscarProductosByNombre(String nombreProducto){
+		return productosDao.buscarProductosByNombre(nombreProducto);
+	}
+	
+	public int maxIdProductos() {
+		return productosDao.maxIdProductos();
+	}
 }

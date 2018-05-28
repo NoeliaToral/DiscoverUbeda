@@ -10,5 +10,7 @@ public interface ProductosService {
 	void insertarProductos(Productos producto);
 	public Productos findById(int id);
 	public List<Productos> listarProductosCategorias(int idCategoria);
-
+	List<Productos> buscarProductosByNombre(String nombreProducto);
+	int maxIdProductos();
+	
 }
