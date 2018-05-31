@@ -4,9 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Usuarios</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Discover Úbeda, artesanía, regalos, heraldica, complementos, recuerdos, souvenirs." />
@@ -19,6 +19,13 @@
 
 <script type="text/javascript" src="static/js/hover_pack.js"></script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<style type="text/css">
+p{
+	text-align: justify;
+	line-height: -5px;
+}
+</style>
 </head>
 <body>
 <div class="header">
@@ -54,53 +61,26 @@
 	      </div><!-- end h_menu4 -->
      </div>
 </div>
+
 <div class="container">
-	
-		<%@include file="authheader.jsp" %>	
-		<div class="panel panel-default">
-			  <!-- Default panel contents -->
-		  	<div class="panel-heading"><span class="lead">List of Users </span></div>
-			<table class="table table-hover">
-	    		<thead>
-		      		<tr>
-				        <th>Firstname</th>
-				        <th>Lastname</th>
-				        <th>Email</th>
-				        <th>SSO ID</th>
-				        <sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
-				        	<th width="100"></th>
-				        </sec:authorize>
-				        <sec:authorize access="hasRole('ADMIN')">
-				        	<th width="100"></th>
-				        </sec:authorize>
-				        
-					</tr>
-		    	</thead>
-	    		<tbody>
-				<c:forEach items="${users}" var="user">
-					<tr>
-						<td>${user.firstName}</td>
-						<td>${user.lastName}</td>
-						<td>${user.email}</td>
-						<td>${user.ssoId}</td>
-					    <sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
-							<td><a href="<c:url value='/edit-user-${user.ssoId}' />" class="btn btn-success custom-width">edit</a></td>
-				        </sec:authorize>
-				        <sec:authorize access="hasRole('ADMIN')">
-							<td><a href="<c:url value='/delete-user-${user.ssoId}' />" class="btn btn-danger custom-width">delete</a></td>
-        				</sec:authorize>
-					</tr>
-				</c:forEach>
-	    		</tbody>
-	    	</table>
-		</div>
-		<sec:authorize access="hasRole('ADMIN')">
-		 	<div class="well">
-		 		<a href="<c:url value='/newuser' />">Add New User</a>
-		 	</div>
-	 	</sec:authorize>
+  <h2 class="tituloH2">Aviso de cookies</h2>
+  <p>Utilizamos cookies, píxels y otras tecnologías (en conjunto, "cookies") para reconocer tu navegador, tu dispositivo, para saber más sobre tus intereses y para proporcionarte herramientas esenciales y servicios y para otros fines, por ejemplo:</p>
+  <ul>
+  	<li>- Reconocer cuando te registras para usar nuestros servicios, lo que nos permite ofrecerte recomendaciones de productos, mostrarte contenido personalizado y ofrecerte otras funcionalidades y servicios personalizados.</li>
+  	<li>- Mantener un registro de las preferencias seleccionadas por ti, lo que nos permite actuar en función de las mismas, como por ejemplo si deseas ver o no publicidad personalizada.</li>
+  	<li>- Mantener un registro de los productos guardados en tu cesta</li>
+  	<li>- Llevar a cabo investigaciones y diagnósticos para mejorar el contenido, los productos y los servicios de Discover Úbeda</li>
+  	<li>- Prevenir actividades fraudulentas.</li>
+  	<li>- Mejorar la seguridad.</li>
+  	<li>- Informar. Esto nos permite considerar y analizar el rendimiento de nuestros servicios.</li>
+  </ul>
+  
+  <p>Las cookies de Discover Úbeda te ofrecen la posibilidad de aprovechar muchas de las funcionalidades esenciales de Discover Úbeda. Por ejemplo, si rechazas o bloqueas nuestras cookies, no podrás añadir productos a la Cesta, acceder a la página de finalización del pedido ni usar ninguno de los productos o servicios de Discover Úbeda que requieren que inicies una sesión</p>
+  <p>Los terceros autorizados también pueden utilizar cookies cuando interactúas con los servicios de Discover Úbeda. Entre los que se incluyen motores de búsqueda, proveedores de servicios de medición y analíticos, redes sociales y compañías de publicidad. Los terceros utilizan cookies en el proceso para proporcionar contenidos, incluyendo anuncios relevantes para tus intereses, para medir la efectividad de sus anuncios y para prestar servicios en nombre de Discover Úbeda.</p>
+  <p>Puedes gestionar las cookies de tu navegador a través de la configuración de tu navegador. En la función "Ayuda" de la mayoría de los navegadores se indica cómo configurar tu navegador para que no acepte cookies nuevas, para que te notifique cada vez que recibes una nueva cookie, como desactivar cookies y cuando caducarán las cookies. Si desactivas todas las cookies en tu navegador, ni nosotros ni terceros transferiremos cookies a tu navegador. Sin embargo, es probable que tengas que ajustar algunas de tus preferencias manualmente siempre que visites una página y que algunas de las herramientas y servicios no funcionen.</p>
+  </br>
 </div>
-   	
+
 <div class="footer_bg">
 </div>
 <div class="footer">
@@ -141,7 +121,7 @@
 				<ul>
 					<li><a href="politicaPrivacidad ">Política de privacidad</a></li> .
 					<li><a href="terminosServicios ">Términos del servicio</a></li> .
-					<li><a href="cookies ">Política de Cookies</a></li> 
+					<li><a href="cookies ">Política de Cookies</a></li>
 				</ul>
 			</div>
 			<div class="copy">
@@ -149,6 +129,7 @@
 		    </div>
 		    <div class="clearfix"> </div>
        	</div>
-</div>   	
+</div>
 </body>
 </html>
+

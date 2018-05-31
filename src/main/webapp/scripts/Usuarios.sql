@@ -35,14 +35,14 @@ select * from APP_USER_USER_PROFILE;
   
 /* Populate USER_PROFILE Table */
 INSERT INTO USER_PROFILE(type)
-VALUES ('USER');
+VALUES ('USUARIOS');
   
 INSERT INTO USER_PROFILE(type)
 VALUES ('ADMIN');
   
 INSERT INTO USER_PROFILE(type)
-VALUES ('DBA');
-  
+VALUES ('EMPLEADOS');
+
   
 /* Populate one Admin User which will further create other users for the application using GUI */
 INSERT INTO APP_USER(sso_id, password, first_name, last_name, email)
@@ -64,3 +64,4 @@ CREATE TABLE persistent_logins (
 );
 
 select * from persistent_logins;
+

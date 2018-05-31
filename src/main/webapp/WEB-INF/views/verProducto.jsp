@@ -1,39 +1,89 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Discover Úbeda</title>
+<title>Ver producto</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Discover Úbeda, artesanía, regalos, heraldica, complementos, recuerdos, souvenirs." />
+<meta name="keywords"
+	content="Discover Úbeda, artesanía, regalos, heraldica, complementos, recuerdos, souvenirs." />
 
 <spring:url value="static/css/bootstrap.css" var="bootstrap" />
 <link href="${bootstrap}" rel="stylesheet" />
 <spring:url value="static/css/style.css" var="estiloCss" />
 <link href="${estiloCss}" rel="stylesheet" />
-<link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+<spring:url value="static/css/etalage.css" var="etalage" />
+<link href="${etalage}" rel="stylesheet" />
+<link
+	href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900'
+	rel='stylesheet' type='text/css'>
 
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<script type="text/javascript" src="static/js/jquery-1.11.1.min.js"></script>
-<script src="static/js/responsiveslides.min.js"></script>
-<script>
-    $(function () {
-      $("#slider").responsiveSlides({
-      	auto: true,
-      	nav: true,
-      	speed: 500,
-        namespace: "callbacks",
-        pager: true,
-      });
-    });
+<script type="application/x-javascript">
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 </script>
+<script type="text/javascript" src="static/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="static/js/hover_pack.js"></script>
+<script src="static/js/jquery.etalage.min.js"></script>
+<script>
+	jQuery(document)
+			.ready(
+					function($) {
+
+						$('#etalage')
+								.etalage(
+										{
+											thumb_image_width : 300,
+											thumb_image_height : 400,
+											source_image_width : 900,
+											source_image_height : 1200,
+											show_hint : true,
+											click_callback : function(
+													image_anchor, instance_id) {
+												alert('Callback example:\nYou clicked on an image with the anchor: "'
+														+ image_anchor
+														+ '"\n(in Etalage instance: "'
+														+ instance_id + '")');
+											}
+										});
+
+					});
+</script>
+
+<script src="static/js/easyResponsiveTabs.js" type="text/javascript"></script>
+		    <script type="text/javascript">
+			    $(document).ready(function () {
+			        $('#horizontalTab').easyResponsiveTabs({
+			            type: 'default', //Types: default, vertical, accordion           
+			            width: 'auto', //auto or any width like 600px
+			            fit: true   // 100% fit in a container
+			        });
+			    });
+            </script>	
+<!--initiate accordion-->
+	<script type="text/javascript">
+		$(function() {
+			var menu_ul = $('.menu > li > ul'), menu_a = $('.menu > li > a');
+			menu_ul.hide();
+			menu_a.click(function(e) {
+				e.preventDefault();
+				if (!$(this).hasClass('active')) {
+					menu_a.removeClass('active');
+					menu_ul.filter(':visible').slideUp('normal');
+					$(this).addClass('active').next().stop(true, true)
+							.slideDown('normal');
+				} else {
+					$(this).removeClass('active');
+					$(this).next().stop(true, true).slideUp('normal');
+				}
+			});
+
+		});
+	</script>
 </head>
 <body>
 <div class="header">
@@ -124,28 +174,60 @@
 					<li class="subitem1"><a href="listarCategorias-Regalos"><img class="arrow-img" src="static/images/f_menu.png" alt=""/>Regalos</a></li>							
 				</ul>				
 			</ul>
-		</div>			
-</div>			
-	   </div> 
-	   <div class="col-md-9 content_right">	   
-		<div class="top_grid1">
-		   <c:forEach items="${listado}" var="producto">   
-		   <div class="col-md-4 top_grid1-box1">
-		     	<div class="grid_1"><a href="<c:url value='/verProducto-${producto.idProductos}' />">
-		     	  <div class="b-link-stroke b-animate-go  thickbox">
-			        <img src="${producto.url}" class="img-responsive" alt=""/> </div>
-		     	  <div class="grid_2">
-		     	  	Nombre:<c:out value="${producto.nombreProducto}"></c:out>
-		     	  	<ul class="grid_2-bottom">
-		     	  		<li class="grid_2-left"><p><c:out value="${producto.precio}"></c:out></p></li>
-		     	  		<li class="grid_2-right">
-		     	  			<form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" >
+			</div>			
+		</div>	
+	</div>
+	<div class="col-md-9 single_right">
+		<div class="single_top">
+			<div class="single_grid">
+				<div class="grid images_3_of_2">
+					<ul id="etalage">
+						<li><a href="optionallink.html"> <img
+								class="etalage_thumb_image" src="<c:out value="${listado.url1}"></c:out>"
+								class="img-responsive" /> <img class="etalage_source_image"
+								src="<c:out value="${listado.url1}"></c:out>" class="img-responsive" title="" />
+						</a></li>
+						<li><img class="etalage_thumb_image"
+							src="<c:out value="${listado.url2}"></c:out>" class="img-responsive" /> <img
+							class="etalage_source_image" src="<c:out value="${listado.url2}"></c:out>"
+							class="img-responsive" title="" /></li>
+						<li><img class="etalage_thumb_image"
+							src="<c:out value="${listado.url3}"></c:out>" class="img-responsive" /> <img
+							class="etalage_source_image" src="<c:out value="${listado.url3}"></c:out>"
+							class="img-responsive" /></li>
+						<li><img class="etalage_thumb_image"
+							src="<c:out value="${listado.url4}"></c:out>" class="img-responsive" /> <img
+							class="etalage_source_image" src="<c:out value="${listado.url4}"></c:out>"
+							class="img-responsive" /></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="desc1 span_3_of_2">
+					<h1><c:out value="${listado.nombreProducto}"></c:out></h1>
+					<p class="availability">
+						Disponible: <span class="color">En stock</span>
+					</p>
+					<div class="price_single">
+						<span class="actual"><c:out value="${listado.precio}"></c:out></span>
+					</div>
+					<h2 class="quick">Descripción:</h2>
+					<p class="quick_desc"><c:out value="${listado.descripcionCorta}"></c:out></p>
+					<div class="wish-list">
+						<ul>
+							<li class="wish"><a href="#">Add to Wishlist</a></li>
+							<li class="compare"><a href="#">Add to Compare</a></li>
+						</ul>
+					</div>
+										
+					
+						
+						<form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" >
 								<input type="hidden" name="cmd" value="_cart">
 								<input type="hidden" name="business" value="ntj00003-facilitator@red.ujaen.es">
 								<input type="hidden" name="lc" value="ES">
-								<input type="hidden" name="item_name" value="${producto.nombreProducto}">
-								<input type="hidden" name="item_number" value="${producto.idProductos}">
-								<input type="hidden" name="amount" value="${producto.precio}">
+								<input type="hidden" name="item_name" value="${listado.nombreProducto}">
+								<input type="hidden" name="item_number" value="${listado.idProductos}">
+								<input type="hidden" name="amount" value="${listado.precio}">
 								<input type="hidden" name="currency_code" value="EUR">
 								<input type="hidden" name="button_subtype" value="products">
 								<input type="hidden" name="no_note" value="1">
@@ -157,26 +239,56 @@
 								<input type="hidden" name="shipping" value="0.50">
 								<input type="hidden" name="add" value="1">
 								<input type="hidden" name="bn" value="PP-ShopCartBF:btn_cart_LG.gif:NonHosted">
-								<input type="image" src="https://www.sandbox.paypal.com/es_ES/ES/i/btn/btn_cart_LG.gif" width="70px" border="0" name="submit" alt="PayPal, la forma rápida y segura de pagar en Internet."> 								
-							</form>		     	  		
-		     	  		</li>
-		     	  		<div class="clearfix"> </div>
-		     	  	</ul>
-		     	  </div>
-		     	  </a>
-		     	</div>
-		     </div>
-		     </c:forEach>
-	     </div>
-	   		</div>
+								<input type="image" src="https://www.sandbox.paypal.com/es_ES/ES/i/btn/btn_cart_LG.gif" width="30%" border="0" name="submit" alt="PayPal, la forma rápida y segura de pagar en Internet."> 								
+							</form>	
+						
+						
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="sap_tabs">
+			<div id="horizontalTab"
+				style="display: block; width: 100%; margin: 0px;">
+				<ul class="resp-tabs-list">
+					<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Descripción del producto</span></li>
+					<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Información adiccional</span></li>
+					<li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Comentarios</span></li>
+					<div class="clear"></div>
+				</ul>
+				<div class="resp-tabs-container">
+					<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+						<div class="facts">
+							<ul class="tab_list">
+								<li><c:out value="${listado.descripcionLarga}"></c:out></li>
+							</ul>
+						</div>
+					</div>
+					<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
+						<div class="facts">
+							<ul class="tab_list">
+								<li>Material: <c:out value="${listado.material}"></c:out></li>
+								<li>Talla: <c:out value="${listado.talla}"></c:out></li>
+							</ul>
+						</div>
+					</div>
+					<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+						<ul class="tab_list">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>	     
-	    
-	  
-	       	    
 
-
+	</div>
+	</div>
+</div>
+	
+	
+	
 <div class="footer_bg">
 </div>
 <div class="footer">
@@ -227,4 +339,4 @@
        	</div>
 </div>
 </body>
-</html>				
+</html>

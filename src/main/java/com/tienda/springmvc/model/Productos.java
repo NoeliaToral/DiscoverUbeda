@@ -21,7 +21,8 @@ public class Productos implements Serializable{
 	
 	private Integer idProductos;
 	private String nombreProducto;
-	private String descripcion;
+	private String descripcionCorta;
+	private String descripcionLarga;
 	private double precio;
 	private String url;
 	private String material;
@@ -39,21 +40,27 @@ public class Productos implements Serializable{
 	public Productos() {
 	}
 
-	public Productos(String nombreProducto, String descripcion, double precio) {
+	public Productos(Integer idProductos, String nombreProducto, String descripcionCorta, String descripcionLarga,
+			double precio, String url, String material, String talla, String url1, String url2, String url3,
+			String url4, String url5, Categorias categoria) {
+		super();
+		this.idProductos = idProductos;
 		this.nombreProducto = nombreProducto;
-		this.descripcion = descripcion;
-		this.precio = precio;
-	}
-
-	public Productos(String nombreProducto, String descripcion, double precio, String url, String material,
-			String talla) {
-		this.nombreProducto = nombreProducto;
-		this.descripcion = descripcion;
+		this.descripcionCorta = descripcionCorta;
+		this.descripcionLarga = descripcionLarga;
 		this.precio = precio;
 		this.url = url;
 		this.material = material;
 		this.talla = talla;
+		this.url1 = url1;
+		this.url2 = url2;
+		this.url3 = url3;
+		this.url4 = url4;
+		this.url5 = url5;
+		this.categoria = categoria;
 	}
+
+
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -75,15 +82,7 @@ public class Productos implements Serializable{
 		this.nombreProducto = nombreProducto;
 	}
 
-	@Column(name = "descripcion", nullable = false, length = 100)
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
+	
 	@Column(name = "precio", nullable = false, precision = 22, scale = 0)
 	public double getPrecio() {
 		return this.precio;
@@ -173,6 +172,24 @@ public class Productos implements Serializable{
 
 	public void setUrl5(String url5) {
 		this.url5 = url5;
+	}
+
+	@Column(name = "descripcionCorta")
+	public String getDescripcionCorta() {
+		return descripcionCorta;
+	}
+
+	public void setDescripcionCorta(String descripcionCorta) {
+		this.descripcionCorta = descripcionCorta;
+	}
+
+	@Column(name = "descripcionLarga")
+	public String getDescripcionLarga() {
+		return descripcionLarga;
+	}
+
+	public void setDescripcionLarga(String descripcionLarga) {
+		this.descripcionLarga = descripcionLarga;
 	}
 
 	

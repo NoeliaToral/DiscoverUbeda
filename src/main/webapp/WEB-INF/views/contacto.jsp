@@ -4,9 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Usuarios</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Discover Úbeda, artesanía, regalos, heraldica, complementos, recuerdos, souvenirs." />
@@ -42,7 +42,7 @@
 				<ul class="nav">
 					<li><a href="listarProductos" data-hover="Home">Inicio</a></li>
 					<li><a href="https://discover-ubeda-visitas-guiadas9.webnode.es/" data-hover="Visitas guiadas">Visitas guiadas</a></li>
-					<li><a href="contacto" data-hover="Contactanos">Contáctanos</a></li>
+					<li class="active"><a href="contacto" data-hover="Contactanos">Contáctanos</a></li>
 					<li><a href="construccion" data-hover="Leyendas">Leyendas</a></li>
 					<li><a href="construccion" data-hover="Gastronomia">Gastronomía</a></li>
 					<sec:authorize access="hasRole('ADMIN')">
@@ -54,53 +54,60 @@
 	      </div><!-- end h_menu4 -->
      </div>
 </div>
-<div class="container">
-	
-		<%@include file="authheader.jsp" %>	
-		<div class="panel panel-default">
-			  <!-- Default panel contents -->
-		  	<div class="panel-heading"><span class="lead">List of Users </span></div>
-			<table class="table table-hover">
-	    		<thead>
-		      		<tr>
-				        <th>Firstname</th>
-				        <th>Lastname</th>
-				        <th>Email</th>
-				        <th>SSO ID</th>
-				        <sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
-				        	<th width="100"></th>
-				        </sec:authorize>
-				        <sec:authorize access="hasRole('ADMIN')">
-				        	<th width="100"></th>
-				        </sec:authorize>
-				        
-					</tr>
-		    	</thead>
-	    		<tbody>
-				<c:forEach items="${users}" var="user">
-					<tr>
-						<td>${user.firstName}</td>
-						<td>${user.lastName}</td>
-						<td>${user.email}</td>
-						<td>${user.ssoId}</td>
-					    <sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
-							<td><a href="<c:url value='/edit-user-${user.ssoId}' />" class="btn btn-success custom-width">edit</a></td>
-				        </sec:authorize>
-				        <sec:authorize access="hasRole('ADMIN')">
-							<td><a href="<c:url value='/delete-user-${user.ssoId}' />" class="btn btn-danger custom-width">delete</a></td>
-        				</sec:authorize>
-					</tr>
-				</c:forEach>
-	    		</tbody>
-	    	</table>
+
+<div class="about">
+ <div class="container">
+  <div class="singel_right">
+			     <div class="col-md-8">
+				      <div class="contact-form">
+				  	        <form method="post" action="contact-post.html">
+					    	    <p class="comment-form-author"><label for="author">Tu nombre:</label>
+					    	    	<input type="text" class="textbox" value="Escribe aquí tú nombre..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your name here...';}">
+						    	</p>
+						        <p class="comment-form-author"><label for="author">Email:</label>
+						     	   <input type="text" class="textbox" value="Escribe aquí tú correo electrónico..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
+						        </p>
+						        <p class="comment-form-author"><label for="author">Mensaje:</label>
+						    	  <textarea placeholder="Escribe aquí su mensaje..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}"></textarea>
+						        </p>
+						        <input name="submit" type="submit" id="submit" value="Enviar">
+					        </form>
+				       </div>
+			     </div>
+			     <div class="col-md-4 contact_right">
+					<h3>Dirección</h3>
+				    <div class="address">
+						<i class="pin_icon"></i>
+					    <div class="contact_address">
+							Nos encontramos en la calle Real nº40. Situada en Úbeda Ciudad Patrimonio de la Humanidad dentro en la provincia de Jáen.
+					    </div>
+					    <div class="clearfix"></div>
+					</div>
+					<div class="address">
+						<i class="phone"></i>
+					    <div class="contact_address">
+						   666-666-666
+					    </div>
+					    <div class="clearfix"></div>
+					</div>
+					<div class="address">
+						<i class="mail"></i>
+					    <div class="contact_email">
+						  <a href="malito:ntj00003@red.ujaen.es">ntj00003@red.ujaen.es</a>
+					    </div>
+					    <div class="clearfix"></div>
+					</div>
+		        </div>
+		        <div class="clearfix"></div>
 		</div>
-		<sec:authorize access="hasRole('ADMIN')">
-		 	<div class="well">
-		 		<a href="<c:url value='/newuser' />">Add New User</a>
-		 	</div>
-	 	</sec:authorize>
+		<div class="map">
+			<iframe src="https://www.google.com/maps/embed?pb=!4v1526501579937!6m8!1m7!1s7L2qBH17IAgQCapOS69vLw!2m2!1d38.00957030656649!2d-3.369143237755362!3f241.76736424386468!4f-8.796376115979271!5f0.7820865974627469"></iframe>
+		</div>
+     </div>
 </div>
-   	
+
+
+
 <div class="footer_bg">
 </div>
 <div class="footer">
@@ -149,6 +156,6 @@
 		    </div>
 		    <div class="clearfix"> </div>
        	</div>
-</div>   	
+</div>
 </body>
 </html>

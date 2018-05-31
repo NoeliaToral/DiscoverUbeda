@@ -2,24 +2,39 @@ create table categorias(
 	idCategoria int(10) auto_increment primary key,
     descripcionCategoria varchar (20)
 );
-
+INSERT INTO CATEGORIAS (descripcionCategoria) VALUES ('Artesania');
 INSERT INTO CATEGORIAS (descripcionCategoria) VALUES ('Complementos');
+INSERT INTO CATEGORIAS (descripcionCategoria) VALUES ('Heraldica');
+INSERT INTO CATEGORIAS (descripcionCategoria) VALUES ('Recuerdos');
 INSERT INTO CATEGORIAS (descripcionCategoria) VALUES ('Regalos');
+INSERT INTO CATEGORIAS (descripcionCategoria) VALUES ('Otros');
+select * from categorias;
+
 
 create table productos(
 	idProductos int(13) not null auto_increment,
-    nombreProducto varchar(15) not null,
-    descripcion varchar(100) not null,
+    nombreProducto varchar(30) not null,
+    descripcionCorta varchar(100) not null,
+    descripcionLarga varchar(500),
     precio double not null,
-    idCategoria int(10),
-    url varchar(30),
-    material varchar(20),
-    talla varchar(5),
+    idCategoria int(10) DEFAULT 6,
+    material varchar(80),
+    talla varchar(10),
+    url varchar(50),
+    url1 varchar(50),
+    url2 varchar(50),
+    url3 varchar(50),
+    url4 varchar(50),
+    url5 varchar(50),
     primary key (idProductos),
     CONSTRAINT FK_ID_CATEGORIA FOREIGN KEY (idCategoria) REFERENCES CATEGORIAS (idCategoria)
 );
 
-insert into productos (nombreProducto, descripcion, precio, idCategoria, url, material, talla) values('taza','es un taza','25','2','static/css/images/1_atras.png','no lo se','');
+select * from productos;
+insert into productos (nombreProducto, descripcionCorta, descripcionLarga, precio, idCategoria, material, talla, url) values('hola taza','es un taza','es otra taza','25','2','no lo se','','static/imgProductos/13/images.png');
+
+
+select * from carrito;
 
 create table carrito(
 	id_venta int(13) not null auto_increment,

@@ -78,7 +78,7 @@ public class AppController {
 	/**
 	 * This method will list all existing users.
 	 */
-	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"/list" }, method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
 
 		List<User> users = userService.findAllUsers();
@@ -256,12 +256,12 @@ public class AppController {
 
 	
 
-	@RequestMapping(value = "/insertarProductos")
+	@RequestMapping(value = "/insertarProductos", method = RequestMethod.GET)
 	public String insertar(ModelMap model) {
+		//Primero cargamos el jsp diciendo que vamos a obtener un producto
 		Productos producto = new Productos();
 		model.addAttribute("productos", producto);
-		model.addAttribute("edit", true);
-
+		
 		return "insertarProductos";
 	}
 
@@ -273,34 +273,35 @@ public class AppController {
 			throws IOException {
 
 		//Obtenemos el maximo id para meterlo en la carpeta +1 
-		int maximoId = productosService.maxIdProductos() + 1;
-		
-		//Recogemos todas las imagenes
-		if (!file.isEmpty()) {
-			try {
-				String url = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
-				productos.setUrl(url);
-				byte[] bytes = file.getBytes();
+				int maximoId = productosService.maxIdProductos() + 1;
 				
-				File url2 = new File(url);
-				// Creamos el directorio para almacenar el archivo	
-				if (!url2.exists())
-					url2.mkdirs();
-				File dirFile = new File(url + File.separator + file.getOriginalFilename());
-				
-				// Crear documento en la carpeta
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dirFile));
-				
-				stream.write(bytes);
-				stream.close();
+				//Recogemos todas las imagenes
+				if (!file.isEmpty()) {
+					try {
+						String url = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+						
+						byte[] bytes = file.getBytes();
+						
+						File url2 = new File(url);
+						// Creamos el directorio para almacenar el archivo	
+						if (!url2.exists())
+							url2.mkdirs();
+						File dirFile = new File(url + File.separator + file.getOriginalFilename());
+						productos.setUrl("static/imgProductos/" + maximoId + "/" + file.getOriginalFilename());
+						// Crear documento en la carpeta
+						BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dirFile));
+						
+						stream.write(bytes);
+						stream.close();
 
-				System.out.println( "Documento subido correctamente = " + file.getOriginalFilename() + " Ubicacion del Archivo = " + dirFile.getAbsolutePath());
-			} catch (Exception e) {
-				System.out.println( "Ocurrio un error al subir documento" + file.getOriginalFilename() + " => " + e.getMessage());
-			}
-		} else {
-			System.out.println("Ocurrio un error al subir " + file.getOriginalFilename() + " documento vacio.");
-		}
+						System.out.println( "Documento subido correctamente = " + file.getOriginalFilename() + " Ubicacion del Archivo = " + dirFile.getAbsolutePath());
+					} catch (Exception e) {
+						System.out.println( "Ocurrio un error al subir documento" + file.getOriginalFilename() + " => " + e.getMessage());
+					}
+				} else {
+					System.out.println("Ocurrio un error al subir " + file.getOriginalFilename() + " documento vacio.");
+				}
+
 		
 		if(!fileUno.isEmpty()) {
 			try {
@@ -316,12 +317,26 @@ public class AppController {
 			}
 		}
 		
+		if(!fileUno.isEmpty()) {
+			try {
+				String url1 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				byte[] bytesUno = fileUno.getBytes();
+				File dirFileUno = new File(url1 + File.separator + fileUno.getOriginalFilename());
+				productos.setUrl1("static/imgProductos/" + maximoId + "/"  + fileUno.getOriginalFilename());
+				BufferedOutputStream stream1 = new BufferedOutputStream(new FileOutputStream(dirFileUno));
+				stream1.write(bytesUno);
+				stream1.close();
+			}catch (Exception e) {
+				System.out.println( "Ocurrio un error al subir documento" + fileUno.getOriginalFilename() + " => " + e.getMessage());
+			}
+		}
+		
 		if(!fileDos.isEmpty()) {
 			try {
 				String url2 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
-				productos.setUrl2(url2);
 				byte[] bytesDos = fileDos.getBytes();
-				File dirFileDos = new File(url2 + File.separator + fileDos.getOriginalFilename());
+				File dirFileDos = new File(url2 + fileDos.getOriginalFilename());
+				productos.setUrl2("static/imgProductos/" + maximoId + "/" + fileDos.getOriginalFilename());
 				BufferedOutputStream stream2 = new BufferedOutputStream(new FileOutputStream(dirFileDos));
 				stream2.write(bytesDos);
 				stream2.close();
@@ -333,9 +348,9 @@ public class AppController {
 		if(!fileTres.isEmpty()) {
 			try {
 				String url3 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
-				productos.setUrl3(url3);
 				byte[] bytesTres = fileTres.getBytes();
-				File dirFileTres = new File(url3 + File.separator + fileTres.getOriginalFilename());
+				File dirFileTres = new File(url3 + fileTres.getOriginalFilename());
+				productos.setUrl3("static/imgProductos/" + maximoId + "/" + fileTres.getOriginalFilename());
 				BufferedOutputStream stream3 = new BufferedOutputStream(new FileOutputStream(dirFileTres));
 				stream3.write(bytesTres);
 				stream3.close();
@@ -347,9 +362,9 @@ public class AppController {
 		if(!fileCuatro.isEmpty()) {
 			try {
 				String url4 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
-				productos.setUrl4(url4);
 				byte[] bytesCuatro = fileCuatro.getBytes();
-				File dirFileCuatro = new File(url4 + File.separator + fileCuatro.getOriginalFilename());
+				File dirFileCuatro = new File(url4 + fileCuatro.getOriginalFilename());
+				productos.setUrl4("static/imgProductos/" + maximoId + "/" + fileCuatro.getOriginalFilename());
 				BufferedOutputStream stream4 = new BufferedOutputStream(new FileOutputStream(dirFileCuatro));
 				stream4.write(bytesCuatro);
 				stream4.close();
@@ -361,9 +376,9 @@ public class AppController {
 		if(!fileCinco.isEmpty()) {
 			try {
 				String url5 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
-				productos.setUrl5(url5);
 				byte[] bytesCinco = fileCinco.getBytes();
-				File dirFileCinco = new File(url5 + File.separator + fileCinco.getOriginalFilename());
+				File dirFileCinco = new File(url5 + fileCinco.getOriginalFilename());
+				productos.setUrl5("static/imgProductos/" + maximoId + "/" + fileCinco.getOriginalFilename());
 				BufferedOutputStream stream5 = new BufferedOutputStream(new FileOutputStream(dirFileCinco));
 				stream5.write(bytesCinco);
 				stream5.close();
@@ -377,19 +392,52 @@ public class AppController {
 		
 		return "insertadoOK";
 	}
+
 	
-	@RequestMapping(value = { "/listarProductos" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/listarProductos" }, method = RequestMethod.GET)
 	public String listProductos(ModelMap model) {
 
+		//Buscamos todos los productos en la base de datos y los pasamos a la vista
 		List<Productos> listadoProductos = productosService.listarProductos();
 		model.addAttribute("listado", listadoProductos);
+		return "listadoProductos";
+	}
 		
+	@RequestMapping(value=  { "/listarCategorias-{descripcion}" }, method = RequestMethod.GET)
+	public String listadoCategorias(@PathVariable String descripcion,ModelMap model) {
 		
+		//Buscamos el id de la categoria elegida
+		int idCategoria = categoriasService.findByDescripcion(descripcion);
+		//Sacamos los productos que tengan esa categoria
+		List<Productos> listadoProductos = productosService.listarProductosCategorias(idCategoria);
+		
+		model.addAttribute("listado", listadoProductos);
+				
+		return "listadoProductos";
+		
+	}
+	
+	@RequestMapping(value=  { "/buscarProductos" }, method = RequestMethod.POST)
+	public String buscarProductos(HttpServletRequest req, ModelMap model) {
+		
+		//Buscamos en la base de datos por el nombre del producto
+		String nombreProducto = "%"+ req.getParameter("nombreProducto") +"%";
+		List<Productos> listadoProductos = productosService.buscarProductosByNombre(nombreProducto);
+		model.addAttribute("listado", listadoProductos);
 		
 		return "listadoProductos";
 	}
+
 	
-	
+	@RequestMapping(value=  { "/verProducto-{id}" }, method = RequestMethod.GET)
+	public String verProducto(ModelMap model,@PathVariable int id) {
+		
+		//Recogemos el id del producto seleccionado y lo pasamos a la vista
+		Productos listadoProductos = productosService.findById(id);
+		model.addAttribute("listado", listadoProductos);
+		
+		return "verProducto";
+	}
 	
 	@RequestMapping(value=  { "/comprarProducto-{idProductos}" }, method = RequestMethod.GET)
 	public String comprarProducto(@PathVariable int idProductos, ModelMap model, HttpServletRequest req) {
@@ -426,49 +474,45 @@ public class AppController {
 		model.addAttribute("listadoCarrito", listadoCarrito);
 		model.addAttribute("productosListar", productosListar);
 		model.addAttribute("loggedinuser", getPrincipal());
-		
-		
-		
-		
-		
+				
 		return "listadoCarrito";
 	}
 	
-	@RequestMapping(value=  { "/pagoCorrecto" }, method = RequestMethod.POST)
-	public String pagoCorrecto(HttpServletRequest req) {
+	@RequestMapping(value=  { "/contacto" }, method = RequestMethod.GET)
+	public String contacto() {
 		
-		String prueba = req.getParameter("payment_status");
-		String prueba2 = req.getParameter("item_number");
-		
-		return "pagoCorrecto";
+		return "contacto";
 	}
 	
-	@RequestMapping(value=  { "/listarCategorias-{descripcion}" }, method = RequestMethod.GET)
-	public String listadoCategorias(@PathVariable String descripcion,ModelMap model) {
+	@RequestMapping(value=  { "/cookies" }, method = RequestMethod.GET)
+	public String cookies() {
 		
-		//Buscamos el id de la categoria elegida
-		int idCategoria = categoriasService.findByDescripcion(descripcion);
-		//Sacamos los productos que tengan esa categoria
-		List<Productos> listadoProductos = productosService.listarProductosCategorias(idCategoria);
-		
-		model.addAttribute("listado", listadoProductos);
-				
-		return "listadoProductos";
-		
+		return "cookies";
 	}
 	
-	@RequestMapping(value=  { "/buscarProductos" }, method = RequestMethod.POST)
-	public String buscarProductos(HttpServletRequest req, ModelMap model) {
-		String nombreProducto = "%"+ req.getParameter("nombreProducto") +"%";
-		List<Productos> listadoProductos = productosService.buscarProductosByNombre(nombreProducto);
-		model.addAttribute("listado", listadoProductos);
-		return "listadoProductos";
+	@RequestMapping(value=  { "/terminosServicios" }, method = RequestMethod.GET)
+	public String terminosServicios() {
+		
+		return "terminosServicios";
 	}
+	
+	@RequestMapping(value=  { "/politicaPrivacidad" }, method = RequestMethod.GET)
+	public String politicaPrivacidad() {
+		
+		return "politicaPrivacidad";
+	}
+	
+//	@RequestMapping(value=  { "/pagoCorrecto" }, method = RequestMethod.POST)
+//	public String pagoCorrecto(HttpServletRequest req) {
+//		
+//		String prueba = req.getParameter("payment_status");
+//		String prueba2 = req.getParameter("item_number");
+//		
+//		return "pagoCorrecto";
+//	}
+	
+	
 
-	@RequestMapping(value=  { "/css" }, method = RequestMethod.GET)
-	public String css() {
-		return "Listado-para-css";
-	}
 
 	
 
