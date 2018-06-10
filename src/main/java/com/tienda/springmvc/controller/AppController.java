@@ -130,7 +130,7 @@ public class AppController {
 		userService.saveUser(user);
 
 		model.addAttribute("success",
-				"User " + user.getFirstName() + " " + user.getLastName() + " registered successfully");
+				"Usuario " + user.getFirstName() + " " + user.getLastName() + " registrado satisfactoriamente");
 		model.addAttribute("loggedinuser", getPrincipal());
 		// return "success";
 		return "registrationsuccess";
@@ -171,7 +171,7 @@ public class AppController {
 		userService.updateUser(user);
 
 		model.addAttribute("success",
-				"User " + user.getFirstName() + " " + user.getLastName() + " updated successfully");
+				"Usuario " + user.getFirstName() + " " + user.getLastName() + " actualizado satisfactoriamente");
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "registrationsuccess";
 	}
@@ -451,8 +451,6 @@ public class AppController {
 		System.out.println("id producto: "+idProductos);
 		Productos productos  = productosService.findById(idProductos);
 		
-	
-		
 		int unidades = 1;
 		Carrito carrito = new Carrito();
 		carrito.setUser(user);
@@ -471,10 +469,26 @@ public class AppController {
 			lista.getProductos();
 			productosListar.add(lista.getProductos());
 		}
-		model.addAttribute("listadoCarrito", listadoCarrito);
+		//model.addAttribute("listadoCarrito", listadoCarrito);
 		model.addAttribute("productosListar", productosListar);
 		model.addAttribute("loggedinuser", getPrincipal());
 				
+		return "listadoCarrito";
+	}
+	
+	@RequestMapping(value=  { "/carrito" }, method = RequestMethod.GET)
+	public String carrito(ModelMap model) {
+		List<Productos> productosListar = new ArrayList<Productos>();
+		User user = new User();
+		String username = getPrincipal();
+		user = userService.findBySSO(username);
+		List<Carrito> listadoCarrito = carritoService.listarCarritoUser(user.getId());
+		
+		for (Carrito lista: listadoCarrito) {
+			lista.getProductos();
+			productosListar.add(lista.getProductos());
+		}
+		model.addAttribute("productosListar", productosListar);
 		return "listadoCarrito";
 	}
 	
@@ -502,18 +516,6 @@ public class AppController {
 		return "politicaPrivacidad";
 	}
 	
-//	@RequestMapping(value=  { "/pagoCorrecto" }, method = RequestMethod.POST)
-//	public String pagoCorrecto(HttpServletRequest req) {
-//		
-//		String prueba = req.getParameter("payment_status");
-//		String prueba2 = req.getParameter("item_number");
-//		
-//		return "pagoCorrecto";
-//	}
 	
 	
-
-
-	
-
 }

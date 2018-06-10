@@ -30,12 +30,12 @@
 	<div class="header_top">
 		<div class="container">
 			<div class="logo">
-				<a href="index.html"><img src="static/images/logo.png" alt=""/></a>
+				<a href="index.html"><img class="logo" src="static/images/logo.png" alt=""/></a>
 			</div>
 			<ul class="shopping_grid">
-			      <a href="newuser"><li>Crear cuenta</li></a>
-			      <a href="login"><li>Iniciar sesión</li></a>
-			      <a href="#"><li><span class="m_1">Shopping Bag</span>&nbsp;&nbsp;(0) &nbsp;<img src="static/images/bag.png" alt=""/></li></a>
+			      <li><a href="newuser">Crear cuenta</a></li>
+			      <li><a href="login">Iniciar sesión</a></li>
+			      <li><a href="carrito"><span class="m_1">Carrito compra</span>&nbsp;&nbsp;&nbsp;<img src="static/images/bag.png" alt=""/></a></li>
 			      <div class="clearfix"> </div>
 			</ul>
 		    <div class="clearfix"> </div>
@@ -52,6 +52,9 @@
 					<li><a href="construccion" data-hover="Gastronomia">Gastronomía</a></li>
 					<sec:authorize access="hasRole('ADMIN')">
 						<li class="active"><a href="insertarProductos" data-hover="insertarProductos">Insertar productos</a></li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
+						<li><a href="<c:url value="/logout" />">Logout</a></li>
 					</sec:authorize>
 				</ul>
 				 <script type="text/javascript" src="static/js/nav.js"></script>

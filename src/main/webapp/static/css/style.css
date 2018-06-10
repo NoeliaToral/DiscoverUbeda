@@ -1,9 +1,13 @@
-/*
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
-*/
+/****/
+.tituloH2 {
+	text-align: center;
+	margin-bottom: 23px;
+	margin-top: 15px;
+}
+.logo{
+	height: 150px;
+}
+/****/
 h4, h5, h6,
 h1, h2, h3 {margin-top: 0;}
 ul, ol {margin: 0;}
@@ -1310,7 +1314,7 @@ h3.single_head{
 }
 /*--about--*/
 .about{
-	padding:5em 0;
+	padding:2em 0;
 }
 .span1 h3, h3.m_3{
 	text-align: center;
@@ -1616,6 +1620,10 @@ div.register-bottom-grid {
 /*--login--*/
 .login-left {
 	padding: 0;
+}
+.login-center{
+ padding-left: 31%;
+ width: 69%;
 }
 .login-left h3, .login-right h3 {
 	color:#df1f26;
@@ -1992,9 +2000,4 @@ ul.about_box li.box_desc {
 	font: 300 90px/90px Lato, sans-serif;
 }
 }
-/*MIO*/
-.tituloH2 {
-	text-align: center;
-	margin-bottom: 23px;
-	margin-top: 15px;
-}
+

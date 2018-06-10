@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html>
 <head>
 <title>Login page</title>
@@ -19,33 +21,52 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script type="text/javascript" src="static/js/jquery-1.11.1.min.js"></script>
 <script src="static/js/responsiveslides.min.js"></script>
-<script>
-    $(function () {
-      $("#slider").responsiveSlides({
-      	auto: true,
-      	nav: true,
-      	speed: 500,
-        namespace: "callbacks",
-        pager: true,
-      });
-    });
-</script>
 <script type="text/javascript" src="static/js/hover_pack.js"></script>
 </head>
 
 <body>
+<body>
+<div class="header">
+	<div class="header_top">
+		<div class="container">
+			<div class="logo">
+				<a href="index.html"><img class="logo" src="static/images/logo.png" alt=""/></a>
+			</div>
+			<ul class="shopping_grid">
+			      <li><a href="newuser">Crear cuenta</a></li>
+			      <li><a href="login">Iniciar sesión</a></li>
+			      <li><a href="carrito"><span class="m_1">Carrito compra</span>&nbsp;&nbsp;&nbsp;<img src="static/images/bag.png" alt=""/></a></li>
+			      <div class="clearfix"> </div>
+			</ul>
+		    <div class="clearfix"> </div>
+		</div>
+	</div>
+	<div class="h_menu4"><!-- start h_menu4 -->
+		<div class="container">
+				<a class="toggleMenu" href="#">Menu</a>
+				<ul class="nav">
+					<li><a href="listarProductos" data-hover="Home">Inicio</a></li>
+					<li><a href="https://discover-ubeda-visitas-guiadas9.webnode.es/" data-hover="Visitas guiadas">Visitas guiadas</a></li>
+					<li><a href="contacto" data-hover="Contactanos">Contáctanos</a></li>
+					<li><a href="construccion" data-hover="Leyendas">Leyendas</a></li>
+					<li><a href="construccion" data-hover="Gastronomia">Gastronomía</a></li>
+					<sec:authorize access="hasRole('ADMIN')">
+						<li class="active"><a href="insertarProductos" data-hover="insertarProductos">Insertar productos</a></li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
+						<li><a href="<c:url value="/logout" />">Logout</a></li>
+					</sec:authorize>
+				</ul>
+				 <script type="text/javascript" src="static/js/nav.js"></script>
+	      </div><!-- end h_menu4 -->
+     </div>
+</div>
 	<div class="about">
 		<div class="container">
 			<div class="register">
-				<div class="col-md-6 login-left">
-					<h3>NEW CUSTOMERS</h3>
-					<p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-					<a class="acount-btn" href="newuser">Crear una cuenta</a>
-				</div>
-				<div class="col-md-6 login-right">
-					<h3>REGISTERED CUSTOMERS</h3>
-					<p>If you have an account with us, please log in.</p>
-
+				<div class="col-md-6 login-right login-center">
+					<h3>Iniciar sesión en Discover úbeda</h3>
+					
 					<c:url var="loginUrl" value="/login" />
 					<form action="${loginUrl}" method="post">
 						<c:if test="${param.error != null}">
@@ -85,5 +106,54 @@
 			</div>
 		</div>
 	</div>
+<div class="footer_bg">
+</div>
+<div class="footer">
+	<div class="container">
+		<div class="col-md-3 f_grid1">
+			<h3>Sobre nosotros:</h3>
+<!-- 			<a href="#"><img src="static/images/logo.png" alt=""/></a> -->
+			<p>Una bonita tienda donde podrás llevarte recuerdos fabulosos de Úbeda y regalos para toda la familia.</p>
+			<p>También ofrecemos visitas guiadas.</p>
+		</div>
+		<div class="col-md-3 f_grid1 f_grid2">
+			<h3>Síguenos</h3>
+			<ul class="social">
+				<li><a href="https://b-m.facebook.com/DISCOVERUBEDA/"> <i class="fb"> </i><p class="m_3">Facebook</p><div class="clearfix"> </div></a></li>
+			    <li><a href="https://twitter.com/discover_ubeda"><i class="tw"> </i><p class="m_3">Twittter</p><div class="clearfix"> </div></a></li>
+				<li><a href="https://www.instagram.com/discoverubeda/"><i class="instagram"> </i><p class="m_3">Instagram</p><div class="clearfix"> </div></a></li>
+			</ul>
+		</div>
+		<div class="col-md-3 f_grid1 f_grid3">
+			<h3>Contáctanos</h3>
+			<ul class="list">
+				<li><p>+34 666666666</p></li>
+				<li><p>C/Real nº40 Úbeda</p></li>
+				<li><p><a href="mailto:ntj00003@red.ujaen.es">ntj00003@red.ujaen.es</a></p></li>
+			</ul>
+		</div>
+		<div class="col-md-3 f_grid3">
+			<h3>Encuéntranos:</h3>
+				<iframe src="https://www.google.com/maps/embed?pb=!4v1526501579937!6m8!1m7!1s7L2qBH17IAgQCapOS69vLw!2m2!1d38.00957030656649!2d-3.369143237755362!3f241.76736424386468!4f-8.796376115979271!5f0.7820865974627469" width="200" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+			</div>
+		<div class="clearfix"> </div>
+		
+	</div>
+</div>
+<div class="footer_bottom">
+       	<div class="container">
+       		<div class="cssmenu">
+				<ul>
+					<li><a href="construccion ">Política de privacidad</a></li> .
+					<li><a href="construccion ">Términos del servicio</a></li> .
+					<li><a href="construccion ">Política de Cookies</a></li> 
+				</ul>
+			</div>
+			<div class="copy">
+			    <p>&copy;  2018 Plantilla realizada por <a href="#" target="_blank">Discover Úbeda</a></p>
+		    </div>
+		    <div class="clearfix"> </div>
+       	</div>
+</div>
 </body>
 </html>
