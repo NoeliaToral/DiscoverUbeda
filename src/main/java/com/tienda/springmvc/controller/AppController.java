@@ -271,57 +271,49 @@ public class AppController {
 			@RequestParam("fileDos") MultipartFile fileDos,@RequestParam("fileTres") MultipartFile fileTres,
 			@RequestParam("fileCuatro") MultipartFile fileCuatro, @RequestParam("fileCinco") MultipartFile fileCinco)
 			throws IOException {
+		
 
 		//Obtenemos el maximo id para meterlo en la carpeta +1 
-				int maximoId = productosService.maxIdProductos() + 1;
+		int maximoId = productosService.maxIdProductos() + 1;
+		
+		String url = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+		
+		//Recogemos todas las imagenes
+		if (!file.isEmpty()) {
+			try {
+				//String url = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url = "http:\\188.166.174.201\\static\\imgProductos\\" + maximoId + "\\";
+
+				byte[] bytes = file.getBytes();
 				
-				//Recogemos todas las imagenes
-				if (!file.isEmpty()) {
-					try {
-						String url = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
-						
-						byte[] bytes = file.getBytes();
-						
-						File url2 = new File(url);
-						// Creamos el directorio para almacenar el archivo	
-						if (!url2.exists())
-							url2.mkdirs();
-						File dirFile = new File(url + File.separator + file.getOriginalFilename());
-						productos.setUrl("static/imgProductos/" + maximoId + "/" + file.getOriginalFilename());
-						// Crear documento en la carpeta
-						BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dirFile));
-						
-						stream.write(bytes);
-						stream.close();
+				File url2 = new File(url);
+				// Creamos el directorio para almacenar el archivo	
+				if (!url2.exists())
+					url2.mkdirs();
+				File dirFile = new File(url + File.separator + file.getOriginalFilename());
+				productos.setUrl("static/imgProductos/" + maximoId + "/" + file.getOriginalFilename());
+				// Crear documento en la carpeta
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(dirFile));
+				
+				stream.write(bytes);
+				stream.close();
 
-						System.out.println( "Documento subido correctamente = " + file.getOriginalFilename() + " Ubicacion del Archivo = " + dirFile.getAbsolutePath());
-					} catch (Exception e) {
-						System.out.println( "Ocurrio un error al subir documento" + file.getOriginalFilename() + " => " + e.getMessage());
-					}
-				} else {
-					System.out.println("Ocurrio un error al subir " + file.getOriginalFilename() + " documento vacio.");
-				}
-
-		
-		if(!fileUno.isEmpty()) {
-			try {
-				String url1 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
-				productos.setUrl1(url1);
-				byte[] bytesUno = fileUno.getBytes();
-				File dirFileUno = new File(url1 + File.separator + fileUno.getOriginalFilename());
-				BufferedOutputStream stream1 = new BufferedOutputStream(new FileOutputStream(dirFileUno));
-				stream1.write(bytesUno);
-				stream1.close();
-			}catch (Exception e) {
-				System.out.println( "Ocurrio un error al subir documento" + fileUno.getOriginalFilename() + " => " + e.getMessage());
+				System.out.println( "Documento subido correctamente = " + file.getOriginalFilename() + " Ubicacion del Archivo = " + dirFile.getAbsolutePath());
+			} catch (Exception e) {
+				System.out.println( "Ocurrio un error al subir documento" + file.getOriginalFilename() + " => " + e.getMessage());
 			}
+		} else {
+			System.out.println("Ocurrio un error al subir " + file.getOriginalFilename() + " documento vacio.");
 		}
+
 		
+				
 		if(!fileUno.isEmpty()) {
 			try {
-				String url1 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url1 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url1 = "http:\\188.166.174.201\\static\\imgProductos\\" + maximoId + "\\";
 				byte[] bytesUno = fileUno.getBytes();
-				File dirFileUno = new File(url1 + File.separator + fileUno.getOriginalFilename());
+				File dirFileUno = new File(url + File.separator + fileUno.getOriginalFilename());
 				productos.setUrl1("static/imgProductos/" + maximoId + "/"  + fileUno.getOriginalFilename());
 				BufferedOutputStream stream1 = new BufferedOutputStream(new FileOutputStream(dirFileUno));
 				stream1.write(bytesUno);
@@ -333,9 +325,10 @@ public class AppController {
 		
 		if(!fileDos.isEmpty()) {
 			try {
-				String url2 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url2 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url2 = "http:\\188.166.174.201\\static\\imgProductos\\" + maximoId + "\\";
 				byte[] bytesDos = fileDos.getBytes();
-				File dirFileDos = new File(url2 + fileDos.getOriginalFilename());
+				File dirFileDos = new File(url + fileDos.getOriginalFilename());
 				productos.setUrl2("static/imgProductos/" + maximoId + "/" + fileDos.getOriginalFilename());
 				BufferedOutputStream stream2 = new BufferedOutputStream(new FileOutputStream(dirFileDos));
 				stream2.write(bytesDos);
@@ -347,9 +340,10 @@ public class AppController {
 		
 		if(!fileTres.isEmpty()) {
 			try {
-				String url3 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url3 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url3 = "http:\\188.166.174.201\\static\\imgProductos\\" + maximoId + "\\";
 				byte[] bytesTres = fileTres.getBytes();
-				File dirFileTres = new File(url3 + fileTres.getOriginalFilename());
+				File dirFileTres = new File(url+ fileTres.getOriginalFilename());
 				productos.setUrl3("static/imgProductos/" + maximoId + "/" + fileTres.getOriginalFilename());
 				BufferedOutputStream stream3 = new BufferedOutputStream(new FileOutputStream(dirFileTres));
 				stream3.write(bytesTres);
@@ -361,9 +355,10 @@ public class AppController {
 		
 		if(!fileCuatro.isEmpty()) {
 			try {
-				String url4 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url4 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url4 = "http:\\188.166.174.201\\static\\imgProductos\\" + maximoId + "\\";
 				byte[] bytesCuatro = fileCuatro.getBytes();
-				File dirFileCuatro = new File(url4 + fileCuatro.getOriginalFilename());
+				File dirFileCuatro = new File(url + fileCuatro.getOriginalFilename());
 				productos.setUrl4("static/imgProductos/" + maximoId + "/" + fileCuatro.getOriginalFilename());
 				BufferedOutputStream stream4 = new BufferedOutputStream(new FileOutputStream(dirFileCuatro));
 				stream4.write(bytesCuatro);
@@ -375,9 +370,10 @@ public class AppController {
 		
 		if(!fileCinco.isEmpty()) {
 			try {
-				String url5 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url5 = "C:\\Users\\gatyt\\Documents\\GitHub\\DiscoverUbeda\\src\\main\\webapp\\static\\imgProductos\\" + maximoId + "\\";
+				//String url5 = "http:\\188.166.174.201\\static\\imgProductos\\" + maximoId + "\\";
 				byte[] bytesCinco = fileCinco.getBytes();
-				File dirFileCinco = new File(url5 + fileCinco.getOriginalFilename());
+				File dirFileCinco = new File(url + fileCinco.getOriginalFilename());
 				productos.setUrl5("static/imgProductos/" + maximoId + "/" + fileCinco.getOriginalFilename());
 				BufferedOutputStream stream5 = new BufferedOutputStream(new FileOutputStream(dirFileCinco));
 				stream5.write(bytesCinco);
@@ -484,11 +480,17 @@ public class AppController {
 		user = userService.findBySSO(username);
 		List<Carrito> listadoCarrito = carritoService.listarCarritoUser(user.getId());
 		
+		//calcular el precio total
+		double precio = 0;
+		
 		for (Carrito lista: listadoCarrito) {
 			lista.getProductos();
 			productosListar.add(lista.getProductos());
+			precio = precio + lista.getProductos().getPrecio();
 		}
+		
 		model.addAttribute("productosListar", productosListar);
+		model.addAttribute("precio", precio);
 		return "listadoCarrito";
 	}
 	

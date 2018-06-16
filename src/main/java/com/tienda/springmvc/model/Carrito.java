@@ -34,6 +34,7 @@ public class Carrito implements Serializable{
 	@OneToOne
 	@JoinColumn(name="carritoUser_id")
 	private User user;
+
 	
 	public Carrito() {
 		
@@ -79,6 +80,5 @@ public class Carrito implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 }

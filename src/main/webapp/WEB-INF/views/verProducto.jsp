@@ -185,10 +185,14 @@
 				<div class="grid images_3_of_2">
 					<ul id="etalage">
 						<li><a href="optionallink.html"> <img
-								class="etalage_thumb_image" src="<c:out value="${listado.url1}"></c:out>"
+								class="etalage_thumb_image" src="<c:out value="${listado.url}"></c:out>"
 								class="img-responsive" /> <img class="etalage_source_image"
-								src="<c:out value="${listado.url1}"></c:out>" class="img-responsive" title="" />
+								src="<c:out value="${listado.url}"></c:out>" class="img-responsive" title="" />
 						</a></li>
+						<li><img class="etalage_thumb_image"
+							src="<c:out value="${listado.url1}"></c:out>" class="img-responsive" /> <img
+							class="etalage_source_image" src="<c:out value="${listado.url1}"></c:out>"
+							class="img-responsive" title="" /></li>
 						<li><img class="etalage_thumb_image"
 							src="<c:out value="${listado.url2}"></c:out>" class="img-responsive" /> <img
 							class="etalage_source_image" src="<c:out value="${listado.url2}"></c:out>"
@@ -222,27 +226,6 @@
 					</div>
 									
 					<div><a href="<c:url value='/comprarProducto-${listado.idProductos}' />">Añadir al carrito</a></div>
-						
-						<form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" >
-								<input type="hidden" name="cmd" value="_cart">
-								<input type="hidden" name="business" value="ntj00003-facilitator@red.ujaen.es">
-								<input type="hidden" name="lc" value="ES">
-								<input type="hidden" name="item_name" value="${listado.nombreProducto}">
-								<input type="hidden" name="item_number" value="${listado.idProductos}">
-								<input type="hidden" name="amount" value="${listado.precio}">
-								<input type="hidden" name="currency_code" value="EUR">
-								<input type="hidden" name="button_subtype" value="products">
-								<input type="hidden" name="no_note" value="1">
-								<input type="hidden" name="no_shipping" value="2">
-								<input type="hidden" name="rm" value="1">
-								<input type="hidden" name="return" value="http://localhost:8080/DiscoverUbeda/pagoCorrecto">
-								<input type="hidden" name="cancel_return" value="http://localhost:8080/DiscoverUbeda/pagoNoCorrecto">
-								<input type="hidden" name="tax_rate" value="21.000">
-								<input type="hidden" name="shipping" value="0.50">
-								<input type="hidden" name="add" value="1">
-								<input type="hidden" name="bn" value="PP-ShopCartBF:btn_cart_LG.gif:NonHosted">
-								<input type="image" src="https://www.sandbox.paypal.com/es_ES/ES/i/btn/btn_cart_LG.gif" width="30%" border="0" name="submit" alt="PayPal, la forma rápida y segura de pagar en Internet."> 								
-							</form>	
 						
 						
 				</div>

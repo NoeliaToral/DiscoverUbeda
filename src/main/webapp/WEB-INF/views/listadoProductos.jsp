@@ -142,26 +142,7 @@
 		     	  	<ul class="grid_2-bottom">
 		     	  		<li class="grid_2-left"><p><c:out value="${producto.precio}"></c:out></p></li>
 		     	  		<li class="grid_2-right">
-		     	  			<form target="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" >
-								<input type="hidden" name="cmd" value="_cart">
-								<input type="hidden" name="business" value="ntj00003-facilitator@red.ujaen.es">
-								<input type="hidden" name="lc" value="ES">
-								<input type="hidden" name="item_name" value="${producto.nombreProducto}">
-								<input type="hidden" name="item_number" value="${producto.idProductos}">
-								<input type="hidden" name="amount" value="${producto.precio}">
-								<input type="hidden" name="currency_code" value="EUR">
-								<input type="hidden" name="button_subtype" value="products">
-								<input type="hidden" name="no_note" value="1">
-								<input type="hidden" name="no_shipping" value="2">
-								<input type="hidden" name="rm" value="1">
-								<input type="hidden" name="return" value="http://localhost:8080/DiscoverUbeda/pagoCorrecto">
-								<input type="hidden" name="cancel_return" value="http://localhost:8080/DiscoverUbeda/pagoNoCorrecto">
-								<input type="hidden" name="tax_rate" value="21.000">
-								<input type="hidden" name="shipping" value="0.50">
-								<input type="hidden" name="add" value="1">
-								<input type="hidden" name="bn" value="PP-ShopCartBF:btn_cart_LG.gif:NonHosted">
-								<input type="image" src="https://www.sandbox.paypal.com/es_ES/ES/i/btn/btn_cart_LG.gif" width="70px" border="0" name="submit" alt="PayPal, la forma rápida y segura de pagar en Internet."> 								
-							</form>		     	  		
+		     	  			<div><a href="<c:url value='/comprarProducto-${producto.idProductos}' />">Añadir al carrito</a></div>		     	  		
 		     	  		</li>
 		     	  		<div class="clearfix"> </div>
 		     	  	</ul>

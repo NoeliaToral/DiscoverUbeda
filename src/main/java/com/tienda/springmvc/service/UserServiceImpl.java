@@ -3,6 +3,7 @@ package com.tienda.springmvc.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +20,7 @@ public class UserServiceImpl implements UserService{
 	private UserDao dao;
 
 	@Autowired
-    private PasswordEncoder passwordEncoder;
+    private ShaPasswordEncoder passwordEncoder;
 	
 	public User findById(int id) {
 		return dao.findById(id);
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public void saveUser(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setPassword(passwordEncoder.encodePassword(user.getPassword(), null));
 		dao.save(user);
 	}
 
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService{
 		if(entity!=null){
 			entity.setSsoId(user.getSsoId());
 			if(!user.getPassword().equals(entity.getPassword())){
-				entity.setPassword(passwordEncoder.encode(user.getPassword()));
+				entity.setPassword(passwordEncoder.encodePassword(user.getPassword(),null));
 			}
 			entity.setFirstName(user.getFirstName());
 			entity.setLastName(user.getLastName());
