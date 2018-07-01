@@ -30,7 +30,7 @@
 	<div class="header_top">
 		<div class="container">
 			<div class="logo">
-				<a href="index.html"><img class="logo" src="static/images/logo.png" alt=""/></a>
+				<a href="listarProductos"><img class="logo" src="static/images/logo.png" alt=""/></a>
 			</div>
 			<ul class="shopping_grid">
 			      <li><a href="newuser">Crear cuenta</a></li>
@@ -50,11 +50,11 @@
 					<li><a href="contacto" data-hover="Contactanos">Contáctanos</a></li>
 					<li><a href="construccion" data-hover="Leyendas">Leyendas</a></li>
 					<li><a href="construccion" data-hover="Gastronomia">Gastronomía</a></li>
-					<sec:authorize access="hasRole('ADMIN')">
+					<sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
 						<li class="active"><a href="insertarProductos" data-hover="insertarProductos">Insertar productos</a></li>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
-						<li><a href="<c:url value="/logout" />">Logout</a></li>
+						<li><a href="<c:url value="/logout" />">Cerrar sesión</a></li>
 					</sec:authorize>
 				</ul>
 				 <script type="text/javascript" src="static/js/nav.js"></script>
@@ -71,21 +71,21 @@
 					<form action="${loginUrl}" method="post">
 						<c:if test="${param.error != null}">
 							<div class="alert alert-danger">
-								<p>Invalid username and password.</p>
+								<p>Nombre y contraseña incorrectas.</p>
 							</div>
 						</c:if>
 						<c:if test="${param.logout != null}">
 							<div class="alert alert-success">
-								<p>You have been logged out successfully.</p>
+								<p>Se ha cerrado la sesión.</p>
 							</div>
 						</c:if>
 						<div class="form-group">
-						    <label for="exampleInputEmail1">Dirección de correo</label>
-						    <input type="text" class="form-control" id="username" name="ssoId" placeholder="Enter Username" required>
+						    <label for="exampleInputEmail1">Nombre de usuario</label>
+						    <input type="text" class="form-control" id="username" name="ssoId" placeholder="Nombre de usuario" required>
 						</div>
 						<div class="form-group">
-						    <label for="password">Dirección de correo</label>
-						    <input type="password" class="form-control" id="password" name="password" placeholder="Enter contraseña" required>
+						    <label for="password">Contraseña</label>
+						    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
 						</div>
  						
 						<div class="input-group input-sm">

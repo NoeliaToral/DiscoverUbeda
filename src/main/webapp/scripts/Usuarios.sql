@@ -47,15 +47,19 @@ VALUES ('EMPLEADOS');
 /* Populate one Admin User which will further create other users for the application using GUI */
 INSERT INTO APP_USER(sso_id, password, first_name, last_name, email)
 VALUES ('sam','$2a$10$4eqIF5s/ewJwHK1p8lqlFOEm2QIA0S8g6./Lok.pQxqcxaBZYChRm', 'Sam','Smith','samy@xyz.com');
-  
-  
+INSERT INTO APP_USER(sso_id, password, first_name, last_name, email)
+VALUES ('admin','d033e22ae348aeb5660fc2140aec35850c4da997', 'admin','toral','admin@gmail.com');
+
+select * from APP_USER_USER_PROFILE;
+select * from APP_USER; 
+
 /* Populate JOIN Table */
-INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
+INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id) 
   SELECT user.id, profile.id FROM app_user user, user_profile profile
-  where user.sso_id='sam' and profile.type='ADMIN';
+  where user.sso_id='admin' and profile.type='ADMIN';
  
 /* Create persistent_logins Table used to store rememberme related stuff*/
-CREATE TABLE persistent_logins (
+CREATE TABLE PERSISTENT_LOGINS(
     username VARCHAR(64) NOT NULL,
     series VARCHAR(64) NOT NULL,
     token VARCHAR(64) NOT NULL,

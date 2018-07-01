@@ -26,7 +26,7 @@
 	<div class="header_top">
 		<div class="container">
 			<div class="logo">
-				<a href="index.html"><img src="static/images/logo.png" alt=""/></a>
+				<a href="listarProductos"><img src="static/images/logo.png" alt=""/></a>
 			</div>
 			<ul class="shopping_grid">
 			      <li><a href="newuser">Crear cuenta</a></li>
@@ -46,11 +46,11 @@
 					<li><a href="contacto" data-hover="Contactanos">Contáctanos</a></li>
 					<li><a href="construccion" data-hover="Leyendas">Leyendas</a></li>
 					<li><a href="construccion" data-hover="Gastronomia">Gastronomía</a></li>
-					<sec:authorize access="hasRole('ADMIN')">
+					<sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
 						<li><a href="insertarProductos" data-hover="insertarProductos">Insertar productos</a></li>
 					</sec:authorize>
-					<sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
-						<li><a href="<c:url value="/logout" />">Logout</a></li>
+					<sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS') or hasRole('USUARIOS')">
+						<li><a href="<c:url value="/logout" />">Cerrar sesión</a></li>
 					</sec:authorize>
 					
 				 </ul>
@@ -61,7 +61,7 @@
 <div class="container">
 	<div class="generic-container">
 		<div class="authbar">
-			<span>Dear <strong>${loggedinuser}</strong>, You are not authorized to access this page.</span> <span class="floatRight"><a href="<c:url value="/logout" />">Logout</a></span>
+			<span>Hola <strong>${loggedinuser}</strong>, Tu no estas autorizado para acceder a esta página.</span> <span class="floatRight"><a href="<c:url value="/logout" />">Logout</a></span>
 		</div>
 	</div>
 </div>

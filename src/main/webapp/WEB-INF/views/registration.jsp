@@ -27,7 +27,7 @@
 	<div class="header_top">
 		<div class="container">
 			<div class="logo">
-				<a href="index.html"><img class="logo" src="static/images/logo.png" alt=""/></a>
+				<a href="listarProductos"><img class="logo" src="static/images/logo.png" alt=""/></a>
 			</div>
 			<ul class="shopping_grid">
 			      <li><a href="newuser">Crear cuenta</a></li>
@@ -47,11 +47,11 @@
 					<li><a href="contacto" data-hover="Contactanos">Contáctanos</a></li>
 					<li><a href="construccion" data-hover="Leyendas">Leyendas</a></li>
 					<li><a href="construccion" data-hover="Gastronomia">Gastronomía</a></li>
-					<sec:authorize access="hasRole('ADMIN')">
+					<sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
 						<li><a href="insertarProductos" data-hover="insertarProductos">Insertar productos</a></li>
 					</sec:authorize>
-					<sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS')">
-						<li><a href="<c:url value="/logout" />">Logout</a></li>
+					<sec:authorize access="hasRole('ADMIN') or hasRole('EMPLEADOS') or hasRole('USUARIOS')">
+						<li><a href="<c:url value="/logout" />">Cerrar sesión</a></li>
 					</sec:authorize>
 					
 				 </ul>
@@ -84,14 +84,14 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-4" for="ssoId">SSO ID:</label>
+      <label class="control-label col-sm-4" for="ssoId">Nombre de usuario:</label>
       <div class="col-sm-4">          
         <c:choose>
 				<c:when test="${edit}">
-					<form:input type="text" path="ssoId" id="ssoId" placeholder="SSO ID" class="form-control" disabled="true"/>
+					<form:input type="text" path="ssoId" id="ssoId" placeholder="Nombre de usuario" class="form-control" disabled="true"/>
 				</c:when>
 			<c:otherwise>
-				<form:input type="text" path="ssoId" id="ssoId" placeholder="SSO ID" class="form-control" />
+				<form:input type="text" path="ssoId" id="ssoId" placeholder="Nombre de usuario" class="form-control" />
 				<div class="has-error">
 					<form:errors path="ssoId" class="help-inline"/>
 				</div>

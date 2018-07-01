@@ -1,4 +1,4 @@
-create table categorias(
+create table CATEGORIAS(
 	idCategoria int(10) auto_increment primary key,
     descripcionCategoria varchar (20)
 );
@@ -11,13 +11,13 @@ INSERT INTO CATEGORIAS (descripcionCategoria) VALUES ('Otros');
 select * from categorias;
 
 
-create table productos(
+create table PRODUCTOS(
 	idProductos int(13) not null auto_increment,
     nombreProducto varchar(30) not null,
     descripcionCorta varchar(100) not null,
     descripcionLarga varchar(500),
     precio double not null,
-    idCategoria int(10) DEFAULT 6,
+    idCategoria int(10),
     material varchar(80),
     talla varchar(10),
     url varchar(50),
@@ -26,7 +26,7 @@ create table productos(
     url3 varchar(50),
     url4 varchar(50),
     url5 varchar(50),
-    primary key (idProductos),
+    PRIMARY KEY (idProductos),
     CONSTRAINT FK_ID_CATEGORIA FOREIGN KEY (idCategoria) REFERENCES CATEGORIAS (idCategoria)
 );
 
@@ -36,7 +36,7 @@ insert into productos (nombreProducto, descripcionCorta, descripcionLarga, preci
 
 select * from carrito;
 
-create table carrito(
+create table CARRITO(
 	id_venta int(13) not null auto_increment,
     unidades int(100),
     idProductos int(13),

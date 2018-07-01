@@ -460,14 +460,17 @@ public class AppController {
 		
 		List<Productos> productosListar = new ArrayList<Productos>();
 		
+		double precio = 0;
 		
 		for (Carrito lista: listadoCarrito) {
 			lista.getProductos();
 			productosListar.add(lista.getProductos());
+			precio = precio + lista.getProductos().getPrecio();
 		}
 		//model.addAttribute("listadoCarrito", listadoCarrito);
 		model.addAttribute("productosListar", productosListar);
 		model.addAttribute("loggedinuser", getPrincipal());
+		model.addAttribute("precio", precio);
 				
 		return "listadoCarrito";
 	}
@@ -516,6 +519,12 @@ public class AppController {
 	public String politicaPrivacidad() {
 		
 		return "politicaPrivacidad";
+	}
+	
+	@RequestMapping(value=  { "/construccion" }, method = RequestMethod.GET)
+	public String construccion() {
+		
+		return "construccion";
 	}
 	
 	
